@@ -8,11 +8,8 @@
         <th>年齢</th>
         <th>推定ユーザー数</th>
       </tr>
-      <tr v-for="item in items" :key="item.age">
-        <td>{{ item.age }}</td>
-        <td>{{ item.users }}</td>
-      </tr>
     </table>
+    {{items}}
   </div>
 </template>
 
@@ -30,7 +27,9 @@
       users: Math.random() * 10000
     }))
   }
-
+  function changeToWord () {
+    return "world"
+  }
   export default {
     computed: {
       length() {
@@ -39,16 +38,18 @@
     },
 
     data: () => ({
-      items: []
+      items: changeToWord()
     }),
 
     methods: {
       fetch() {
-        this.items = getJson()
+        this.items ="worlds"
       }
     },
     created() {
-      this.fetch()
+      () => {
+        this.items = "worlds"
+      }
     }
   }
 </script>
