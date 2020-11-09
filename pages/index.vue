@@ -1,56 +1,29 @@
 <template>
   <div>
     <h1>table page</h1>
-    <button @click="fetch">fetch</button>
-    {{length}}件fetchしました
-    <table border="1">
-      <tr>
-        <th>年齢</th>
-        <th>推定ユーザー数</th>
-      </tr>
-    </table>
-    {{items}}
+    <button @click="click">get</button>
+    {{res}}
   </div>
 </template>
 
 <script>
-  function getJson() {
-    const ages = Array.from(
-      new Set(
-        new Array( parseInt(Math.random() * 100))
-          .fill( null )
-          .map(() => parseInt(Math.random() * 100))
-      )
-    )
-    return ages.map(age => ({
-      age,
-      users: Math.random() * 10000
-    }))
-  }
-  function changeToWord () {
-    return "world"
-  }
   export default {
-    computed: {
-      length() {
-        return this.items.length
-      }
-    },
-
     data: () => ({
-      items: changeToWord()
+      res: ""
     }),
 
     methods: {
-      fetch() {
-        this.items ="worlds"
+      click() {
+        const response = this.$axios.$get("http://httpbin.org/ip")
+          .then( response => {
+            this.res = response.origin
+          })
+          .catch( error => {
+            this.res = "getリクエストに失敗"
+            console.log("response error", error)
+          })
       }
     },
-    created() {
-      () => {
-        this.items = "worlds"
-      }
-    }
   }
 </script>
 <style scoped lang="scss">
