@@ -46,6 +46,9 @@
       fetch() {
         this.items = getJson()
       }
+    },
+    created() {
+      this.fetch()
     }
   }
 </script>
