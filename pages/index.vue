@@ -10,7 +10,7 @@
 
     <section class="works">
       <h2>代表作</h2>
-      <div class="article-body">
+      <ArticleBody>
         <p>『吾輩は猫である』（1905年）がデビュー作である。</p>
         <ul>
           <li>『吾輩は猫である』（1905年）</li>
@@ -18,7 +18,7 @@
           <li>『草枕』（1906年）</li>
           <li>『三四郎』（1908年）</li>
         </ul>
-      </div>
+      </ArticleBody>
     </section>
   </div>
 </template>
