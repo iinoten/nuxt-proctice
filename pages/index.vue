@@ -1,73 +1,24 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        my-portfolio-nuxt-ample
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+<div class="page-index">
+    <section class="about">
+      <h2>夏目漱石</h2>
+      <div class="article-body">
+        <img src="~/assets/images/portrait.png" alt="夏目漱石">
+        <p>日本の小説家、評論家、英文学者。本名、夏目 金之助（なつめ きんのすけ）。江戸の牛込馬場下横町（現在の東京都新宿区喜久井町）出身。俳号は愚陀仏。詳細は<a href="https://ja.wikipedia.org/wiki/夏目漱石" target="_blank">ウィキペディア</a>を。</p>
       </div>
-    </div>
+    </section>
+
+    <section class="works">
+      <h2>代表作</h2>
+      <div class="article-body">
+        <p>『吾輩は猫である』（1905年）がデビュー作である。</p>
+        <ul>
+          <li>『吾輩は猫である』（1905年）</li>
+          <li>『坊っちゃん』（1906年）</li>
+          <li>『草枕』（1906年）</li>
+          <li>『三四郎』（1908年）</li>
+        </ul>
+      </div>
+    </section>
   </div>
 </template>
-
-<script>
-export default {}
-</script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
