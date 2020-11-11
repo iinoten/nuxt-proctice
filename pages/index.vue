@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>table page</h1>
-    <button @click="click">get</button>
+    <button @click="click">go chat page</button>
     {{res}}
   </div>
 </template>
@@ -14,14 +14,7 @@
 
     methods: {
       click() {
-        const response = this.$axios.$get("http://httpbin.org/ip")
-          .then( response => {
-            this.res = response.origin
-          })
-          .catch( error => {
-            this.res = "getリクエストに失敗"
-            console.log("response error", error)
-          })
+        this.$router.push({name:"chat"})
       }
     },
   }
