@@ -19,7 +19,7 @@
     <div>
       <ul>
         <li v-for="item in this.chatLogs" :key="item.message">
-          {{ item.message }}
+          {{ item.name+ '「' + item.message+ '」' }}
         </li>
       </ul>
     </div>
@@ -62,19 +62,17 @@
       }
     },
     mounted: function () {
-       const db = firebase.firestore()
+        const db = firebase.firestore()
         db.collection('chats').doc('test')
           .get()
           .then((res) => {
-            console.log(res.data())
-            const chatLogsDataArray = res.data().logs;
-            const tempChatLog = []
-              chatLogsDataArray.forEach(element => {
-                tempChatLog.push(element)
-              });
-              console.log(tempChatLog)
-              this.chatLogs = tempChatLog
+            this.inputMessageValue = "";
           })
+      firebase.firestore().collection('chats').doc('test')
+        .onSnapshot(doc => {
+          console.log(doc.data())
+          this.chatLogs = doc.data().logs
+        })
     }
   }
 </script>
