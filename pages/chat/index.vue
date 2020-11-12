@@ -2,6 +2,15 @@
   <div>
     <div>chat page</div>
     <div>
+      <label>
+          <input
+            type="text"
+            v-model="inputMessageValue"
+            
+           /> 
+      </label>
+    </div>
+    <div>
       <ul>
         <li v-for="item in this.chatLogs" :key="item.message">
           {{ item.message }}
@@ -15,8 +24,17 @@
   import firebase from '~/plugins/firebase'
   export default {
     data: ()=>({
-      chatLogs: []
+      chatLogs: [],
+      inputMessageValue: "",
+
     }),
+    watch: {
+      inputMessageValue: {
+        handler( newVal, oldVal ) {
+          console.log(newVal, oldVal)
+        } 
+      }
+    },
     mounted: function () {
        const db = firebase.firestore()
         db.collection('chats').doc('test')
