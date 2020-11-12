@@ -3,11 +3,17 @@
     <div>chat page</div>
     <div>
       <label>
+          <h4>ハンドルネーム</h4>
           <input
             type="text"
-            v-model="inputMessageValue"
-            
-           /> 
+            v-model="inputNameValue"
+           />
+            <h4>投稿文</h4>
+            <input
+              type="text"
+              v-model="inputMessageValue"
+            />
+            <input type="submit" @click="onClickSubmitForm"/>
       </label>
     </div>
     <div>
@@ -25,14 +31,34 @@
   export default {
     data: ()=>({
       chatLogs: [],
+      inputNameValue: "",
       inputMessageValue: "",
-
     }),
     watch: {
       inputMessageValue: {
         handler( newVal, oldVal ) {
-          console.log(newVal, oldVal)
         } 
+      }
+    },
+    methods: {
+      onClickSubmitForm(){
+        console.log("clicked", this.inputNameValue, this.inputMessageValue)
+        const db = firebase.firestore();
+        const nowTime = new Date();
+        db.collection('chats').doc('test')
+          .update({
+            logs: firebase.firestore.FieldValue.arrayUnion({
+              'date': nowTime.getFullYear() +'-'+ (nowTime.getMonth()+1) +'-'+ nowTime.getDate() +' '+ nowTime.getHours() +':'+ nowTime.getMinutes() +':'+ nowTime.getSeconds(),
+              'message': this.inputMessageValue,
+              name: this.inputNameValue ? this.inputNameValue : 'guest'
+            })
+          })
+          .then((res) => {
+            console.log("送信成功")
+          })
+          .catch( err => {
+            console.log("送信失敗", err)
+          })
       }
     },
     mounted: function () {
