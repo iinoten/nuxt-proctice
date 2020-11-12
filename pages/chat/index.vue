@@ -1,25 +1,25 @@
 <template>
   <div>
-    <div>chat page</div>
     <div>
       <label>
           <h4>ハンドルネーム</h4>
           <input
             type="text"
             v-model="inputNameValue"
+            style="margin-bottom: 8px"
            />
-            <h4>投稿文</h4>
+            <h4>投稿文(必須)</h4>
             <input
               type="text"
               v-model="inputMessageValue"
             />
-            <input type="submit" @click="onClickSubmitForm"/>
+            <input v-bind:disabled="!Boolean(inputMessageValue)" type="submit" @click="onClickSubmitForm"/>
       </label>
     </div>
     <div>
       <ul>
         <li v-for="item in this.chatLogs" :key="item.message">
-          {{ item.name+ '「' + item.message+ '」' }}
+          <ChatIndex :name="item.name" :message="item.message"/>
         </li>
       </ul>
     </div>
@@ -29,6 +29,7 @@
 <script>
   import firebase from '~/plugins/firebase'
   export default {
+    layout: 'chat',
     data: ()=>({
       chatLogs: [],
       inputNameValue: "",
@@ -55,6 +56,7 @@
           })
           .then((res) => {
             console.log("送信成功")
+            this.inputMessageValue = "";
           })
           .catch( err => {
             console.log("送信失敗", err)
@@ -71,7 +73,7 @@
       firebase.firestore().collection('chats').doc('test')
         .onSnapshot(doc => {
           console.log(doc.data())
-          this.chatLogs = doc.data().logs
+          this.chatLogs = doc.data().logs.reverse()
         })
     }
   }
